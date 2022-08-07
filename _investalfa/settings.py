@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'quotes.apps.QuotesConfig'
+    'quotes.apps.QuotesConfig',
+    'companies.apps.CompaniesConfig'
 ]
 
 MIDDLEWARE = [
@@ -50,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'investalfa.urls'
+ROOT_URLCONF = '_investalfa.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'investalfa.wsgi.application'
+WSGI_APPLICATION = '_investalfa.wsgi.application'
 
 
 # Database
