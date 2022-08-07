@@ -1,26 +1,38 @@
-import requests
 from bs4 import BeautifulSoup
+import requests
+from .models import Quote
 
-url = "https://valorinveste.globo.com/cotacoes/"
 
-html_response = requests.get(url=url)
+def data():
+    url = "https://valorinveste.globo.com/cotacoes/"
 
-soup = BeautifulSoup(html_response.text, 'html.parser')
+    html_response = requests.get(url=url)
 
-rows = soup.table.tbody("tr")
+    soup = BeautifulSoup(html_response.text, 'html.parser')
 
-for row in rows:
+    rows = soup.table.tbody("tr")
 
-    name = row("td")[0].text.strip()
-    code = row("td")[1].text.strip()
-    value = (row("td")[2]
-             .text
-             .strip()
-             .replace(',', '.'))
+    ids = []
 
-    print(
-        f"""
-        name={name},
-        code={code},
-        value={value}
-        """)
+    for row in rows:
+
+        name = row("td")[0].text.strip()
+        code = row("td")[1].text.strip()
+        value = (row("td")[2]
+                 .text
+                 .strip()
+                 .replace(',', '.'))
+
+        value = 0 if value == "-" else float(value)
+
+        quote = Quote(
+            name=name,
+            code=code,
+            value=value
+        )
+
+        quote.save()
+
+        ids.append(quote.id)
+
+    return ids

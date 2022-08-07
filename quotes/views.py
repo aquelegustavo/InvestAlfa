@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from .data import data
 
-# Create your views here.
+
+def index(request):
+    data()
+    return HttpResponse("O mulher, salva ai no db! #mulherLibera")
