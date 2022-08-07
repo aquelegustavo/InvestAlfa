@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 from .models import Quote
+from companies.models import Company
 
 
 def data():
@@ -23,15 +24,29 @@ def data():
                  .strip()
                  .replace(',', '.'))
 
+        # Adequação do `value` para caso especial ("-")
         value = 0 if value == "-" else float(value)
 
+        # Obtenção da empresa
+        try:
+            company = Company.objects.get(code=code)
+
+        except Company.DoesNotExist:
+            company = Company(
+                name=name,
+                code=code
+            )
+            company.save()
+
         quote = Quote(
-            name=name,
-            code=code,
+            parent_company=company,
             value=value
         )
 
         quote.save()
+
+        company.last_quote = value
+        company.save()
 
         ids.append(quote.id)
 
