@@ -5,7 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 
 
 class CustomUser(AbstractUser):
-    uid = models.UUIDField(
+    id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
 
     email = models.EmailField(unique=True)

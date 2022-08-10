@@ -12,7 +12,7 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['uid', 'password',
+        fields = ['id', 'password',
                   'email', 'first_name', 'last_name', 'last_login', 'is_active', 'is_staff', 'date_joined']
 
         extra_kwargs = {
@@ -22,6 +22,7 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, data):
         user = CustomUser.objects.create(
+            username=data['email'],
             email=data['email'],
             first_name=data['first_name'],
             last_name=data['last_name']
