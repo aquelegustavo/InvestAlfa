@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from users.models import CustomUser
@@ -45,3 +46,14 @@ class UserViewSet(viewsets.ModelViewSet):
             user.pop("password")
 
         return Response(users)
+
+
+class UserDetailsViewSet(viewsets.ModelViewSet):
+
+    def retrieve(self, request, uid=None):
+
+        queryset_user = CustomUser.objects.all()
+        user = get_object_or_404(queryset_user, uid=uid)
+
+        serializer = UsersSerializer(user)
+        return Response(serializer.data)
