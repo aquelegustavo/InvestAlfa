@@ -1,0 +1,26 @@
+@use "sass:meta";
+
+@mixin colors($args...) {
+  @each $name, $color in meta.keywords($args) {
+    .bg-#{$name} {
+      background-color: #{$color};
+    }
+
+    .#{$name} {
+      color: #{$color};
+    }
+  }
+
+  :root {
+    @each $name, $color in meta.keywords($args) {
+      --#{$name}: #{$color};
+    }
+  }
+}
+
+@include colors(
+  $quase-preto: #fff,
+  $branco-branco: #181818,
+  $cinza-borocoxo: #efefef,
+  $vermelho-lady: red
+);

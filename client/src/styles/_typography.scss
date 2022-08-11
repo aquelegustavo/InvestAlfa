@@ -1,0 +1,82 @@
+body,
+input,
+textarea,
+button {
+  font: 500 1rem Poppins, sans-serif;
+  color: var(--quase-preto);
+
+  word-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  font-family: Poppins, sans-serif;
+  color: var(--quase-preto);
+}
+
+h1 {
+  font-size: 2rem;
+
+  &.huge {
+    font-size: 4rem;
+    line-height: 120%;
+  }
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-weight: 500;
+  font-family: Poppins, sans-serif;
+  color: var(--quase-preto);
+}
+
+a {
+  text-decoration: none;
+  color: var(--azul-pscina);
+
+  .material-icons {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    font-weight: 600;
+  }
+}
+
+/*
+    Conforme a tela vai diminuindo, 
+    a estrutura de font vai diminuindo também.
+    Está em % por uma questão de acessibilidade: 
+    por padrão, o todo o html começa com font-size: 16px,
+    mas, se o user precisa, por n motivos, aumentar
+    a fonte do sistema, esse valor muda. Assim, 
+    por questões de acessibilidade, é amplamente indicado 
+    tudo ser o mais relativo possível.
+*/
+
+// gradually decrease font size as device size
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%; // 15px (default: 16px)
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%; // 14px (default: 16px)
+  }
+}
+
+@media (max-width: 420px) {
+  html {
+    font-size: 81.25%; // 13px (default: 16px)
+  }
+}
