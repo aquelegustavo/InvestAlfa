@@ -1,10 +1,11 @@
 import styles from "./signin.module.scss";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { isExpired } from "react-jwt";
 import { Spinner, Button } from "grommet";
-import React, { useState } from "react";
 import { AuthLayout } from "../../components/AuthLayout";
-import { api } from "../../services/api";
+import api from "../../services/api";
+import { AxiosError, AxiosResponse } from "axios";
 
 export const Signin = () => {
   let navigate = useNavigate();
@@ -12,6 +13,14 @@ export const Signin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+
+    if (token && !isExpired(token)) {
+      navigate("/");
+    }
+  }, []);
 
   let buttonProps = {};
 
@@ -33,13 +42,13 @@ export const Signin = () => {
         username: email,
         password: password,
       })
-      .then(({ data }) => {
+      .then(({ data }: AxiosResponse) => {
         setIsLoading(false);
-        localStorage.setItem("token", data.access);
-        localStorage.setItem("refresh", data.refresh);
+        localStorage.setItem("access_token", data.access);
+        localStorage.setItem("refresh_token", data.refresh);
         navigate("/");
       })
-      .catch((error) => {
+      .catch((error: AxiosError) => {
         setIsLoading(false);
         setError("Usuário ou senhas incorretos.");
         console.error(error);
