@@ -1,0 +1,18 @@
+.hero {
+  position: relative;
+  width: 100%;
+  z-index: -10;
+
+  .hello {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 2rem;
+  }
+
+  .wave {
+    transform: rotate(180deg);
+    z-index: -10;
+    height: 4rem;
+  }
+}
