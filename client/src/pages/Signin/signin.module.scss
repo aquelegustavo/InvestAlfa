@@ -1,0 +1,11 @@
+.signin {
+  .errorLabel {
+    font-size: 0.8em;
+    height: 2em;
+    align-self: flex-start;
+  }
+
+  .error {
+    border-color: var(--vermelho-lady);
+  }
+}

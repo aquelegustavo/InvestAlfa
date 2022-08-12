@@ -19,8 +19,11 @@
 }
 
 @include colors(
-  $quase-preto: #fff,
-  $branco-branco: #181818,
+  $quase-preto: #181818,
+  $branco-branco: #fff,
   $cinza-borocoxo: #efefef,
-  $vermelho-lady: red
+  $vermelho-lady: red,
+  $rosa-bebe: #eeaeca,
+  $rosa-forte: #ed5b9a,
+  $azul-bebe: #94bbe9
 );

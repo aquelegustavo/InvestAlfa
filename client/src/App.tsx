@@ -1,12 +1,23 @@
 import "./styles/global.scss";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
+import { Grommet } from "grommet";
+
+const theme = {
+  global: {
+    colors: {
+      brand: "#eeaeca",
+    },
+  },
+};
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <Grommet theme={theme}>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </Grommet>
   );
 }
 
