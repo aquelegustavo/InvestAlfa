@@ -1,0 +1,34 @@
+@use "../../styles//_shadows";
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  background-color: var(--cinza-borocoxo);
+
+  .divider {
+    flex: 1;
+  }
+
+  .profile {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 0.16rem solid var(--purple-500);
+    border-radius: 50%;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+  }
+}
