@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from rest_framework import status
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from users.permissions import IsOwner
@@ -13,7 +14,8 @@ class MonitoringSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Monitoring
-        fields = ['company', 'user', 'frequency', 'tunnel_min', 'tunnel_max']
+        fields = ['id', 'company', 'user',
+                  'frequency', 'tunnel_min', 'tunnel_max']
 
 
 class MonitoringViewSet(viewsets.ModelViewSet):
@@ -22,23 +24,31 @@ class MonitoringViewSet(viewsets.ModelViewSet):
     permission_classes = [IsOwner]
 
     def list(self, request, uid):
-        queryset = get_object_or_404(Monitoring, user=uid)
-
+        queryset = Monitoring.objects.filter(user__uid=uid)
         serializer = MonitoringSerializer(queryset, many=True)
-        monitoring = serializer.data
+        moni = serializer.data
 
-        return Response(monitoring)
+        return Response(moni)
 
     def create(self, request, uid):
         data = request.data
 
         user = get_object_or_404(
-            CustomUser, uid=data["user"])
+            CustomUser, uid=uid)
         company = get_object_or_404(
             Company, code=data["company"])
 
+        if Monitoring.objects.filter(user__uid=uid, company__code=data["company"]).exists():
+            return Response({"Monitoramento já existente"}, status=status.HTTP_409_CONFLICT)
+
         serializer = MonitoringSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(company=company, user=request.user)
+        serializer.save(company=company, user=user)
 
         return Response(serializer.data)
+
+
+class MonitoringDetailsViewSet(viewsets.ModelViewSet):
+    queryset = Monitoring.objects.all()
+    serializer_class = MonitoringSerializer
+    permission_classes = [IsOwner]

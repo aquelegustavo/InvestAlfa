@@ -7,4 +7,9 @@ urlpatterns = [
         {'get': 'list',
          'post': 'create'},
     )),
+    path('/<pk>/', views.MonitoringDetailsViewSet.as_view(
+        {'delete': 'destroy',
+         'put': 'partial_update'},
+    )),
+
 ]

@@ -26,4 +26,5 @@ class Monitoring(models.Model):
     tunnel_min = models.DecimalField(max_digits=6, decimal_places=2)
     tunnel_max = models.DecimalField(max_digits=6, decimal_places=2)
 
-    last_notification = models.DateTimeField(auto_now_add=True)
+    last_notification = models.DateTimeField(
+        auto_now_add=True,  null=True, blank=True)

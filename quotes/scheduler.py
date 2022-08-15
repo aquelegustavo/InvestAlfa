@@ -12,7 +12,7 @@ def job():
     # Apenas dias de semana
     if not day in (5, 6):
         # Apenas no período em que a Bolsa de Valores está aberta
-        if now.hour >= 10 and now.hour <= 18:
+        if now.hour >= 10 and now.hour <= 22:
             print("Obtendo dados da bolsa...")
             get_data()
 
