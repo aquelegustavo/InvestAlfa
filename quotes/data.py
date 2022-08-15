@@ -4,7 +4,7 @@ from .models import Quote
 from companies.models import Company
 
 
-def data():
+def get_data():
     url = "https://valorinveste.globo.com/cotacoes/"
 
     html_response = requests.get(url=url)
