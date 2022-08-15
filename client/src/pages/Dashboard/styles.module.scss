@@ -1,3 +1,5 @@
+@use "../../styles/shadows";
+
 .dashboard {
   .companies {
     display: flex;
@@ -10,19 +12,39 @@
 
     li {
       list-style: none;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       width: 100%;
-      margin: 1rem 0;
+      border-top: var(--cinza-borocoxo) 1px solid;
+      transition: 0.5s all ease;
+      cursor: pointer;
 
-      h3 {
-        flex: 1;
+      &.active {
+        @extend .shadow-4dp;
+        padding: 2rem;
+        margin: 0.4rem auto;
+        border-radius: 20px;
+        border: none;
       }
 
-      p {
-        flex: 1;
-        text-align: end;
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        width: 100%;
+
+        h3 {
+          flex: 1;
+        }
+
+        p {
+          flex: 1;
+          text-align: end;
+        }
+      }
+
+      .chart {
+        max-width: 42rem;
+        margin: auto;
       }
     }
   }
