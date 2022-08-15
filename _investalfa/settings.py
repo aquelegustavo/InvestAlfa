@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     # 'auth.apps.AuthConfig',
     'companies.apps.CompaniesConfig',
     'quotes.apps.QuotesConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'monitoring'
 ]
 
 REST_FRAMEWORK = {
