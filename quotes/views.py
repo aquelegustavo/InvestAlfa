@@ -1,5 +1,6 @@
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 
 from .models import Quote
 
@@ -18,6 +19,8 @@ class QuoteViewSet(viewsets.ModelViewSet):
 
 
 class QuoteDetailsViewSet(viewsets.ModelViewSet):
+    permission_classes = [AllowAny]
+
     def list(self, request):
         queryset = Quote.objects.all()
         serializer = QuoteSerializer(queryset, many=True)

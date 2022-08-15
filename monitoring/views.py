@@ -1,16 +1,15 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
-
+from users.permissions import IsOwner
 from users.models import CustomUser
 from companies.models import Company
-
 from .models import Monitoring
 
 
 class MonitoringSerializer(serializers.HyperlinkedModelSerializer):
     company = serializers.CharField(source='company.code')
-    user = serializers.CharField(source='user.uid')
+    user = serializers.CharField(source='user.uid', read_only=True)
 
     class Meta:
         model = Monitoring
@@ -20,6 +19,7 @@ class MonitoringSerializer(serializers.HyperlinkedModelSerializer):
 class MonitoringViewSet(viewsets.ModelViewSet):
     queryset = Monitoring.objects.all()
     serializer_class = MonitoringSerializer
+    permission_classes = [IsOwner]
 
     def list(self, request, uid):
         queryset = get_object_or_404(Monitoring, user=uid)
@@ -39,6 +39,6 @@ class MonitoringViewSet(viewsets.ModelViewSet):
 
         serializer = MonitoringSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        response = serializer.save(company=company, user=user)
+        serializer.save(company=company, user=request.user)
 
-        return Response("ok")
+        return Response(serializer.data)

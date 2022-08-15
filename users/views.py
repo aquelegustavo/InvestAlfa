@@ -1,10 +1,14 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
+from rest_framework import permissions
+from rest_framework.permissions import IsAdminUser
 from users.models import CustomUser
+from .permissions import IsOwner
 
 
 class UsersSerializer(serializers.HyperlinkedModelSerializer):
+
     is_active = serializers.BooleanField(read_only=True)
     is_staff = serializers.BooleanField(read_only=True)
     last_login = serializers.DateTimeField(read_only=True)
@@ -20,21 +24,19 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
             'last_name': {'required': True}
         }
 
-    def create(self, data):
-        user = CustomUser.objects.create(
-            username=data['email'],
-            email=data['email'],
-            first_name=data['first_name'],
-            last_name=data['last_name']
-        )
 
-        user.set_password(data['password'])
-        user.save()
+class CreateUserPermission(permissions.BasePermission):
+    """
+    Liberação para criação de usuários
+    """
 
-        return user
+    def has_permission(self, request, view):
+        return request.method == "POST"
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAdminUser | CreateUserPermission]
+
     queryset = CustomUser.objects.all()
     serializer_class = UsersSerializer
 
@@ -48,13 +50,23 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(users)
 
+    def create(self, request):
+        serializer = UsersSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(username=request.data["email"])
+
+        return Response(serializer.data)
+
 
 class UserDetailsViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsOwner]
 
     def retrieve(self, request, uid=None):
 
         queryset_user = CustomUser.objects.all()
         user = get_object_or_404(queryset_user, uid=uid)
+
+        user.pop("password")
 
         serializer = UsersSerializer(user)
         return Response(serializer.data)
