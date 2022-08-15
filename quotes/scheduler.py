@@ -1,10 +1,12 @@
 from datetime import datetime
-from .data import get_data
+import pytz
 from apscheduler.schedulers.background import BackgroundScheduler
+from .data import get_data
 
 
 def job():
-    now = datetime.now().hour
+    timezone = pytz.timezone("America/Sao_Paulo")
+    now = datetime.now().astimezone(timezone)
     day = now.today().weekday()
 
     # Apenas dias de semana
@@ -17,5 +19,5 @@ def job():
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(job, 'interval', minutes=5)
+    scheduler.add_job(job, 'interval', seconds=5)
     scheduler.start()
