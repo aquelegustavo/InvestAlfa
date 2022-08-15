@@ -8,5 +8,7 @@ urlpatterns = [
 
 
     path('<uid>/', views.UserDetailsViewSet.as_view(
-        {'get': 'retrieve'})),
+        {'get': 'retrieve',
+         'delete': 'destroy',
+         'put': 'partial_update'})),
 ]

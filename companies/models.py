@@ -14,4 +14,8 @@ class Company(models.Model):
     code = models.CharField(primary_key=True, max_length=5)
     name = models.CharField(max_length=100)
     last_quote = models.DecimalField(
-        max_digits=5, decimal_places=2, null=True, blank=True, default=None)
+        max_digits=6, decimal_places=2, null=True, blank=True, default=None)
+    min_quote = models.DecimalField(
+        max_digits=6, decimal_places=2)
+    max_quote = models.DecimalField(
+        max_digits=6, decimal_places=2)

@@ -1,8 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
-from rest_framework import permissions
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import AllowAny
 from users.models import CustomUser
 from .permissions import IsOwner
 
@@ -13,6 +12,7 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
     is_staff = serializers.BooleanField(read_only=True)
     last_login = serializers.DateTimeField(read_only=True)
     date_joined = serializers.DateTimeField(read_only=True)
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = CustomUser
@@ -24,49 +24,39 @@ class UsersSerializer(serializers.HyperlinkedModelSerializer):
             'last_name': {'required': True}
         }
 
+    def create(self, data):
+        user = super(UsersSerializer, self).create(data)
+        user.set_password(data['password'])
+        user.username = data["email"]
+        user.save()
 
-class CreateUserPermission(permissions.BasePermission):
-    """
-    Liberação para criação de usuários
-    """
-
-    def has_permission(self, request, view):
-        return request.method == "POST"
+        return user
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser | CreateUserPermission]
 
     queryset = CustomUser.objects.all()
     serializer_class = UsersSerializer
+    permission_classes = [AllowAny]
 
     def list(self, request):
         queryset = CustomUser.objects.all()
         serializer = UsersSerializer(queryset, many=True)
         users = serializer.data
 
-        for user in users:
-            user.pop("password")
-
         return Response(users)
-
-    def create(self, request):
-        serializer = UsersSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(username=request.data["email"])
-
-        return Response(serializer.data)
 
 
 class UserDetailsViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = UsersSerializer
+    lookup_field = 'uid'
     permission_classes = [IsOwner]
 
     def retrieve(self, request, uid=None):
 
         queryset_user = CustomUser.objects.all()
         user = get_object_or_404(queryset_user, uid=uid)
-
-        user.pop("password")
 
         serializer = UsersSerializer(user)
         return Response(serializer.data)

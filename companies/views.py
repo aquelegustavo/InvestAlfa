@@ -10,7 +10,7 @@ from quotes.models import Quote
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Company
-        fields = ['name', 'code', 'last_quote']
+        fields = ['name', 'code', 'last_quote', 'min_quote', 'max_quote']
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
