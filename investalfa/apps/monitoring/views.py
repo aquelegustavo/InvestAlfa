@@ -1,3 +1,7 @@
+"""
+Views da aplicação
+
+"""
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.template import loader
@@ -12,21 +16,62 @@ from .models import Monitoring
 
 
 class MonitoringSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializador
+
+    Attributes:
+        company (str): Código de referência para a empresa
+        user (str): Id (uid) de referência para o usuário
+
+    """
+
     company = serializers.CharField(source='company.code')
     user = serializers.CharField(source='user.uid', read_only=True)
 
     class Meta:
+        """
+        Classe de metadados
+
+        Attributes:
+            model: Modelo de banco de dados
+            fields: Campos a serem considerados pela API Rest
+
+        """
+
         model = Monitoring
         fields = ['id', 'company', 'user',
                   'frequency', 'tunnel_min', 'tunnel_max']
 
 
 class MonitoringViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet de monitoramento
+
+    Attributes:
+        queryset: Query de busca de objetos
+        serializer_class: Serializador
+        permission_classes: Classe de permissão de acesso à View
+
+    """
+
     queryset = Monitoring.objects.all()
     serializer_class = MonitoringSerializer
     permission_classes = [IsOwner]
 
     def list(self, request, uid):
+        """
+        Listar monitoramentos de um usuário
+
+        Sobrescrição de listagem dos monitoramentos
+
+        Arguments:
+            request: Instância de requisição
+            uid: Id do usuário
+
+        Return: (list) Lista de instância de monitoramento
+
+        """
+
         queryset = Monitoring.objects.filter(user__uid=uid)
         serializer = MonitoringSerializer(queryset, many=True)
         moni = serializer.data
@@ -34,6 +79,18 @@ class MonitoringViewSet(viewsets.ModelViewSet):
         return Response(moni)
 
     def create(self, request, uid):
+        """
+        Criar monitoramento
+
+        Sobescrever função de criação de monitoramento
+
+        Arguments:
+            request: Instância de requisição
+            uid: Id do usuário
+
+        Return: (Monitoring) Instância de moniotamento
+
+        """
         data = request.data
 
         user = get_object_or_404(
@@ -52,12 +109,32 @@ class MonitoringViewSet(viewsets.ModelViewSet):
 
 
 class MonitoringDetailsViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet de detalhamento de monitoramento
+
+    Attributes:
+        queryset: Query de busca de objetos
+        serializer_class: Serializador
+        permission_classes: Classe de permissão de acesso à View
+
+    """
     queryset = Monitoring.objects.all()
     serializer_class = MonitoringSerializer
     permission_classes = [IsOwner]
 
 
 def email(request, uid, monitoring_id):
+    """
+    ViewSet do email de monitoramento
+
+    Arguments:
+        request: Instância de requisição
+        uid: Id do usuário
+        monitoring_id: Id do monitoramento
+
+    Return: Template HTML
+
+    """
 
     template = loader.get_template('email.html')
     context = get_context(uid, monitoring_id)
