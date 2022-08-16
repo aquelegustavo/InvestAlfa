@@ -1,9 +1,13 @@
+""" 
+Modelo do banco de dados
+
+"""
 from django.db import models
 
 
 class Quote(models.Model):
     """
-    Cotação
+    Classe Cotação
 
     Attributes:
         parent_company (Company): Referência para empresa da cotação

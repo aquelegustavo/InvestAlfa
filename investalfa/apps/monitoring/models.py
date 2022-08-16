@@ -1,9 +1,13 @@
+""" 
+Modelo do banco de dados
+
+"""
 from django.db import models
 
 
 class Monitoring(models.Model):
     """
-    Monitoramento
+    Classe Monitoramento
 
     Attributes:
         company (companies.Company):  Referência para empresa a ser monitorada
