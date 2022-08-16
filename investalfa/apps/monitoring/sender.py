@@ -1,3 +1,7 @@
+"""
+Enviar email ao usuário
+
+"""
 import base64
 from io import BytesIO
 from django.http import HttpResponse
@@ -14,6 +18,15 @@ from ..companies.models import Company
 
 
 def create_chart(company_code):
+    """ 
+    Gerar gráfico das últimas cotações da empresa
+
+    Função gera uma imagem contendo o gráfico com as cotações armazenadas da empresa que está sendo monitorada.
+
+    Arguments:
+        company_code: Código da empresa
+
+    """
     pyplot.switch_backend('AGG')
     pyplot.figure(figsize=(10, 4))
 
@@ -36,6 +49,16 @@ def create_chart(company_code):
 
 
 def get_context(uid, monitoring_id):
+    """
+    Obtenção do contexto do template
+
+    Arguments:
+        uid: Id do usuário
+        monitoring_id: Id do monitoramento
+
+    Return: Contexto do template
+
+    """
     monitoring = get_object_or_404(
         Monitoring, pk=monitoring_id)
 
@@ -68,6 +91,16 @@ def get_context(uid, monitoring_id):
 
 
 def send_email(uid, monitoring_id):
+    """
+    Envio de email ao usuário
+
+    Função envia email para o usuário de acordo com as configurações da aplicação.
+
+    Arguments:
+        uid: Id do usuário
+        monitoring_id: Id do monitoramento
+
+    """
     context = get_context(uid, monitoring_id)
 
     html = get_template('email.html')
@@ -87,6 +120,6 @@ def send_email(uid, monitoring_id):
         subject,
         text_content,
         "inoamecontrata@gmail.com",
-        ['gustavosimoesmendonca@gmail.com'])
+        [context["user"].email])
     msg.attach_alternative(html_content, "text/html")
     msg.send()

@@ -1,3 +1,7 @@
+"""
+Obtenção de dados da Bolsa de valores
+
+"""
 from bs4 import BeautifulSoup
 import requests
 from .models import Quote
@@ -6,6 +10,16 @@ from ..monitoring.comparator import compare
 
 
 def get_data():
+    """ 
+    Obtenção dos dados pela fonte pública
+
+    A cada 5 minutos, enquanto a bolsa estiver aberta, será obtida as últimas cotações das empresas disponibilizado pela fonte pública Valor Investe.
+
+    Além de atualizar as cotações, a função também chama a função responsável por comparar os valores min e max relativos a cada túnel.
+
+    Returns: (list) Lista de objeto contendo timestamp e value
+
+    """
     url = "https://valorinveste.globo.com/cotacoes/"
 
     html_response = requests.get(url=url)
