@@ -6,6 +6,9 @@ import { Charts } from "../../components/Charts";
 import api from "../../services/api";
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
+import { Button } from "grommet";
+import { Add } from "grommet-icons";
+import { Dialog } from "../../components/Dialog";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -29,6 +32,7 @@ export const Dashboard = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [chart, setChart] = useState("");
+  const [show, setShow] = useState(false);
 
   const user: UserType = useUser();
 
@@ -77,8 +81,6 @@ export const Dashboard = () => {
     return company[0];
   });
 
-  console.log(userMonitoring)
-
   function handleLineClick(companyId: string) {
     setChart(companyId);
     navigate(`#${companyId}`, { replace: true });
@@ -103,7 +105,7 @@ export const Dashboard = () => {
                     <p>{company.code}</p>
                     <p>{company.last_quote} BRL</p>
                   </div>
-                  <div className={styles.chart}>
+                  <div className={styles.details}>
                     {chart == company.code ? (
                       <Charts companyId={company.code} />
                     ) : null}
@@ -131,9 +133,19 @@ export const Dashboard = () => {
                   <p>{company.code}</p>
                   <p>{company.last_quote} BRL</p>
                 </div>
-                <div className={styles.chart}>
+                <div className={styles.details}>
                   {chart == company.code ? (
-                    <Charts companyId={company.code} />
+                    <>
+                      <div>
+                        <Button
+                          primary
+                          label="Monitorar"
+                          icon={<Add />}
+                          onClick={() => setShow(true)}
+                        />
+                      </div>
+                      <Charts companyId={company.code} />
+                    </>
                   ) : null}
                 </div>
               </li>
@@ -141,6 +153,7 @@ export const Dashboard = () => {
           </ul>
         </section>
       </Layout>
+      <Dialog show={show} setShow={setShow} />
     </div>
   );
 };

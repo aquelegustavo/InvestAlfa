@@ -52,7 +52,12 @@
         }
       }
 
-      .chart {
+      .details {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        justify-content: center;
+        gap: 2rem;
         max-width: 42rem;
         margin: auto;
       }
