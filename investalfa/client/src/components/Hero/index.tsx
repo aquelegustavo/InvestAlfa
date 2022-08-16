@@ -12,8 +12,8 @@ export const Hero = () => {
         fill="#efefef"
         paused={false}
         options={{
-          height: 20,
-          amplitude: 30,
+          height: 0.2,
+          amplitude: 40,
           speed: 0.1,
           points: 7,
         }}
