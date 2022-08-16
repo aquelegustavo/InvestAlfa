@@ -8,3 +8,6 @@ db.sqlite3
 
 # env
 .env
+
+# Documentação
+docs/static/ref
