@@ -1,3 +1,7 @@
+"""
+Configurações de URLs
+
+"""
 from django.urls import path
 
 from . import views
@@ -12,3 +16,4 @@ urlpatterns = [
          'delete': 'destroy',
          'put': 'partial_update'})),
 ]
+""" URLs da aplicação """

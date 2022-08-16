@@ -1,3 +1,7 @@
+"""
+Configurações de URLs
+
+"""
 from django.urls import path
 
 from . import views
@@ -7,3 +11,4 @@ urlpatterns = [
     path('charts',
          views.QuoteDetailsViewSet.as_view({'get': 'list'})),
 ]
+""" URLs da aplicação """

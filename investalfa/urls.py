@@ -25,3 +25,4 @@ urlpatterns = [
     path('api/users/<uid>/monitoring/',
          include('investalfa.apps.monitoring.urls')),
 ]
+""" URLs da aplicação """
