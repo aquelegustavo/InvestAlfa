@@ -5,3 +5,6 @@ __pycache__/
 
 # Banco de dados
 db.sqlite3
+
+# env
+.env

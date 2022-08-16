@@ -19,7 +19,7 @@ autopep8 = "^1.6.0"
 pydoctor = "^22.7.0"
 
 [tool.poetry.scripts]
-docs = "scripts:docs"
+ref = "scripts:ref"
 start = "scripts:start"
 
 [build-system]
