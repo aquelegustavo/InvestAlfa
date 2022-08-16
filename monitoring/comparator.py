@@ -1,5 +1,7 @@
+from datetime import datetime
 from django.forms.models import model_to_dict
 from companies.models import Company
+from monitoring.sender import send_email
 from users.models import CustomUser
 from .models import Monitoring
 
@@ -32,5 +34,9 @@ def compare(quotes):
 
 
 def notification_user(moni):
-    user = CustomUser.objects.get(uid=moni.user.uid)
-    print(f"Notificando o usuário {user.first_name}")
+
+    last_notification = datetime(moni.last_notification)
+    delta = datetime.now() - last_notification
+
+    if delta >= moni.frequency:
+        send_email(moni.user.uid, moni.id)

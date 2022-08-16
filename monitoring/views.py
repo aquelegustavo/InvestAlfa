@@ -1,7 +1,10 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.template import loader
 from rest_framework import status
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
+from .sender import get_context
 from users.permissions import IsOwner
 from users.models import CustomUser
 from companies.models import Company
@@ -52,3 +55,11 @@ class MonitoringDetailsViewSet(viewsets.ModelViewSet):
     queryset = Monitoring.objects.all()
     serializer_class = MonitoringSerializer
     permission_classes = [IsOwner]
+
+
+def email(request, uid, monitoring_id):
+
+    template = loader.get_template('email.html')
+    context = get_context(uid, monitoring_id)
+
+    return HttpResponse(template.render(context, request))

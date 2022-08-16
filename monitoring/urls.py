@@ -11,5 +11,6 @@ urlpatterns = [
         {'delete': 'destroy',
          'put': 'partial_update'},
     )),
+    path('/<monitoring_id>/emails', views.email),
 
 ]
