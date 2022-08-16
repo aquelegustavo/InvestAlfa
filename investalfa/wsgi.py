@@ -1,5 +1,5 @@
 """
-WSGI config for investalfa project.
+Configuração WSGI do projeto
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

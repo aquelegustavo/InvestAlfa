@@ -8,3 +8,4 @@ Por Gustavo Simões <gustavosimoesmendonca@gmail.com>
 """
 
 __version__ = "0.1.0"
+""" Versão da aplicação """
