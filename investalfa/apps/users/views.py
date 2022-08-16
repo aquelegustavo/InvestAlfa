@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
-from users.models import CustomUser
+from .models import CustomUser
 from .permissions import IsOwner
 
 

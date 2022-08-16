@@ -5,9 +5,9 @@ from rest_framework import status
 from rest_framework import serializers, viewsets
 from rest_framework.response import Response
 from .sender import get_context
-from users.permissions import IsOwner
-from users.models import CustomUser
-from companies.models import Company
+from ..users.permissions import IsOwner
+from ..users.models import CustomUser
+from ..companies.models import Company
 from .models import Monitoring
 
 

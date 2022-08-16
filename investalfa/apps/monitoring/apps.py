@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CompaniesConfig(AppConfig):
+class MonitoringConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'companies'
+    name = 'investalfa.apps.monitoring'

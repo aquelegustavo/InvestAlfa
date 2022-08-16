@@ -41,11 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
-    # 'auth.apps.AuthConfig',
-    'companies.apps.CompaniesConfig',
-    'quotes.apps.QuotesConfig',
-    'users.apps.UsersConfig',
-    'monitoring'
+    'investalfa.apps.companies',
+    'investalfa.apps.monitoring',
+    'investalfa.apps.quotes',
+    'investalfa.apps.users',
 ]
 
 REST_FRAMEWORK = {
@@ -79,7 +78,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = '_investalfa.urls'
+ROOT_URLCONF = 'investalfa.urls'
 
 TEMPLATES = [
     {
@@ -97,7 +96,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = '_investalfa.wsgi.application'
+WSGI_APPLICATION = 'investalfa.wsgi.application'
 
 
 # Database
@@ -155,7 +154,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'inoamecontrata@gmail.com'
-EMAIL_HOST_PASSWORD = 'hpziwgnxlycdzeeu'  
+EMAIL_HOST_PASSWORD = 'hpziwgnxlycdzeeu'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'inoamecontrata@gmail.com'

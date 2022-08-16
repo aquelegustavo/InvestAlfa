@@ -6,12 +6,11 @@ from django.shortcuts import get_object_or_404
 from django.template import Context
 from django.template.loader import get_template
 from rest_framework import status
-from quotes.models import Quote
 from matplotlib import pyplot
-from quotes.models import Quote
-from monitoring.models import Monitoring
-from users.models import CustomUser
-from companies.models import Company
+from ..quotes.models import Quote
+from ..monitoring.models import Monitoring
+from ..users.models import CustomUser
+from ..companies.models import Company
 
 
 def create_chart(company_code):

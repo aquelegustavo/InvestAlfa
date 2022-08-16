@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 from .models import Quote
-from companies.models import Company
-from monitoring.comparator import compare
+from ..companies.models import Company
+from ..monitoring.comparator import compare
 
 
 def get_data():

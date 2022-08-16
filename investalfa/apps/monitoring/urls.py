@@ -7,10 +7,10 @@ urlpatterns = [
         {'get': 'list',
          'post': 'create'},
     )),
-    path('/<pk>/', views.MonitoringDetailsViewSet.as_view(
+    path('<pk>/', views.MonitoringDetailsViewSet.as_view(
         {'delete': 'destroy',
          'put': 'partial_update'},
     )),
-    path('/<monitoring_id>/emails', views.email),
+    path('<monitoring_id>/emails', views.email),
 
 ]

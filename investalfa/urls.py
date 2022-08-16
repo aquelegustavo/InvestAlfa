@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('api/quotes/', include('quotes.urls')),
-    path('api/companies/', include('companies.urls')),
-    path('api/auth/', include('auth.urls')),
-    path('api/users/', include('users.urls')),
-    path('api/users/<uid>/monitoring', include('monitoring.urls')),
+    path('api/quotes/', include('investalfa.apps.quotes.urls')),
+    path('api/companies/', include('investalfa.apps.companies.urls')),
+    path('api/auth/', include('investalfa.apps.auth.urls')),
+    path('api/users/', include('investalfa.apps.users.urls')),
+    path('api/users/<uid>/monitoring/',
+         include('investalfa.apps.monitoring.urls')),
 ]
