@@ -13,18 +13,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='company',
             name='max_quote',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=6),
+            field=models.DecimalField(
+                decimal_places=2, default=0, max_digits=6),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='company',
             name='min_quote',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=6),
+            field=models.DecimalField(
+                decimal_places=2, default=0, max_digits=6),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='company',
             name='last_quote',
-            field=models.DecimalField(blank=True, decimal_places=2, default=None, max_digits=6, null=True),
+            field=models.DecimalField(
+                blank=True, decimal_places=2, default=None, max_digits=6, null=True),
         ),
     ]

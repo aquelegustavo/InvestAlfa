@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='company',
             name='last_quote',
-            field=models.DecimalField(blank=True, decimal_places=2, default=None, max_digits=5, null=True),
+            field=models.DecimalField(
+                blank=True, decimal_places=2, default=None, max_digits=5, null=True),
         ),
     ]

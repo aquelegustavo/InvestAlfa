@@ -14,10 +14,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Company',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('code', models.CharField(max_length=5)),
-                ('last_quote', models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True)),
+                ('last_quote', models.DecimalField(blank=True,
+                 decimal_places=2, max_digits=5, null=True)),
             ],
         ),
     ]
