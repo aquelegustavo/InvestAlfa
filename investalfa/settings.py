@@ -7,7 +7,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 
 """
 
-from os import getenv
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -78,7 +78,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'client', 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,6 +91,16 @@ TEMPLATES = [
     },
 ]
 """ Configurações padrão de templates """
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static')]
+""" 
+Arquivos estáticos 
+
+Static files (CSS, JavaScript, Images)
+https://docs.djangoproject.com/en/4.1/howto/static-files/
+
+"""
 
 WSGI_APPLICATION = 'investalfa.wsgi.application'
 """ Configuração WSGI """
@@ -154,15 +164,6 @@ USE_I18N = True
 USE_TZ = True
 """ Usar Timezone """
 
-
-STATIC_URL = 'static/'
-""" 
-Arquivos estáticos 
-
-Static files (CSS, JavaScript, Images)
-https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-"""
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

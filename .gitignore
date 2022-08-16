@@ -11,3 +11,6 @@ db.sqlite3
 
 # Documentação
 docs/static/ref
+
+# Build React
+/build

@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from .client import client
 
 urlpatterns = [
+    path("", client, name="client"),
+    path("signin", client, name="client"),
     path('api/quotes/', include('investalfa.apps.quotes.urls')),
     path('api/companies/', include('investalfa.apps.companies.urls')),
     path('api/auth/', include('investalfa.apps.auth.urls')),
