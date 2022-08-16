@@ -47,13 +47,13 @@ export const Charts = ({ companyId }: ChartsProps) => {
             {
               data: company.data,
               fill: "start",
-              borderColor: "rgba(148, 187, 233, 1)",
+              borderColor: "rgba(237, 91, 154, 1)",
               borderWidth: 2,
               backgroundColor: (context: ScriptableContext<"line">) => {
                 const ctx = context.chart.ctx;
                 const gradient = ctx.createLinearGradient(0, 0, 0, 200);
-                gradient.addColorStop(0, "rgba(148, 187, 233, 1)");
-                gradient.addColorStop(1, "rgba(148, 187, 233, 0.2)");
+                gradient.addColorStop(0, "rgba(237, 91, 154, 1)");
+                gradient.addColorStop(1, "rgba(237, 91, 154, 0.2)");
                 return gradient;
               },
             },

@@ -4,7 +4,7 @@ import { decodeToken } from "react-jwt";
 import api from "../services/api";
 
 type User = {
-  id: string;
+  uid: string;
   email: string;
   first_name: string;
   last_name: string;

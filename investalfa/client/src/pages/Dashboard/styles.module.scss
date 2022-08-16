@@ -1,13 +1,23 @@
 @use "../../styles/shadows";
 
 .dashboard {
+  section {
+    margin: 2rem auto 4rem auto;
+    max-width: 64rem;
+    width: 100%;
+
+    .title {
+      margin: 1rem 0;
+      color: var(--rosa-bebe);
+    }
+  }
+
   .companies {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 64rem;
     margin: auto;
 
     li {

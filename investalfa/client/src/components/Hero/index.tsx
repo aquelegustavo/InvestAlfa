@@ -9,7 +9,7 @@ export const Hero = () => {
     <div className={styles.hero}>
       <Wave
         className={styles.wave}
-        fill="#efefef"
+        fill="#ed5b9a"
         paused={false}
         options={{
           height: 0.2,
