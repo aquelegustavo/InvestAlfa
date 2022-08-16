@@ -1,3 +1,8 @@
+"""
+Permissões relacionadas ao usuário
+
+"""
+
 from rest_framework import permissions
 
 
