@@ -1,15 +1,18 @@
 .dialog {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
   padding: 2rem;
+  text-align: center;
 
-  .action {
-    margin-top: 1rem;
-    align-self: flex-end;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
 
-    button {
-      margin-left: 0.4rem;
+    .action {
+      margin: 1rem auto 0 auto;
+      button {
+        margin-left: 0.8rem;
+      }
     }
   }
 }
