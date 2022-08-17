@@ -5,7 +5,7 @@ def start():
     os.system("python manage.py runserver")
 
 
-def ref():
+def docs():
     command = ""
     cmds = ["pydoctor",
             "--project-name=InvestAlfa",
@@ -13,7 +13,7 @@ def ref():
             "--project-url=https://github.com/aquelegustavo/InvestAlfa",
             "--html-viewsource-base=https://github.com/aquelegustavo/InvestAlfa/tree/main",
             "--make-html",
-            "--html-output=./docs/static/ref",
+            "--html-output=./investalfa/client/build/static/ref",
             "--docformat=google",
             "--intersphinx=https://docs.python.org/3/objects.inv",
             "./investalfa"]
