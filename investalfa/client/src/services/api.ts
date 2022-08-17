@@ -8,8 +8,14 @@ import { isExpired } from "react-jwt";
 
 const onRequest = async (config: AxiosRequestConfig) => {
   let accessToken = localStorage.getItem("access_token");
-  console.log(config);
+
   if (config.url?.includes("/auth")) {
+    return config;
+  }
+
+  console.log(config.method, config.url);
+
+  if (config.method == "post" && config.url == "/users/") {
     return config;
   }
 

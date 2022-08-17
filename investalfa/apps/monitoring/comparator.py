@@ -61,5 +61,5 @@ def notification_user(moni):
     last_notification = datetime(moni.last_notification)
     delta = datetime.now() - last_notification
 
-    if delta >= (moni.frequency * 60 * 1000):
+    if delta.timestamp() >= (moni.frequency * 60 * 1000):
         send_email(moni.user.uid, moni.id)

@@ -46,7 +46,7 @@ export const Dashboard = () => {
     const token = localStorage.getItem("access_token");
 
     if (!token || isExpired(token)) {
-      navigate("/sigin");
+      navigate("/signin");
     }
 
     updateUi();

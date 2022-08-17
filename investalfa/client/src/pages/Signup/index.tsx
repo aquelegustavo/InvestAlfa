@@ -7,20 +7,14 @@ import { AuthLayout } from "../../components/AuthLayout";
 import api from "../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 
-export const Signin = () => {
+export const Signup = () => {
   let navigate = useNavigate();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-
-    if (token && !isExpired(token)) {
-      navigate("/");
-    }
-  }, []);
 
   let buttonProps = {};
 
@@ -38,20 +32,18 @@ export const Signin = () => {
     setIsLoading(true);
 
     api
-      .post("/auth/token/", {
-        username: email,
+      .post("/users/", {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
         password: password,
       })
       .then(({ data }: AxiosResponse) => {
-        setIsLoading(false);
-        localStorage.setItem("access_token", data.access);
-        localStorage.setItem("refresh_token", data.refresh);
-        navigate("/");
+        navigate("/signin");
       })
       .catch((error: AxiosError) => {
         setIsLoading(false);
-        setError("Usuário ou senhas incorretos.");
-        console.error(error);
+        setError(JSON.stringify(error.response?.data));
       });
   }
 
@@ -59,7 +51,31 @@ export const Signin = () => {
     <main className={styles.signin}>
       <AuthLayout>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <h1>Bem vindo de volta!</h1>
+          <h1>Criar conta</h1>
+          <input
+            placeholder="Primeiro nome"
+            type="text"
+            className={error == "" ? "" : styles.error}
+            disabled={isLoading}
+            required
+            value={firstName}
+            onChange={(event) => {
+              setError("");
+              setFirstName(event.target.value);
+            }}
+          />
+          <input
+            placeholder="Sobrenome"
+            type="text"
+            className={error == "" ? "" : styles.error}
+            disabled={isLoading}
+            required
+            value={lastName}
+            onChange={(event) => {
+              setError("");
+              setLastName(event.target.value);
+            }}
+          />
           <input
             placeholder="Email"
             type="email"
@@ -86,13 +102,13 @@ export const Signin = () => {
           />
           <p className={styles.errorLabel}>{error}</p>
           <div className={styles.swap}>
-            <Link to="/signup">Criar conta</Link>
+            <Link to="/signin">Entrar</Link>
           </div>
           <Button
             {...buttonProps}
             primary
             type="submit"
-            label="Entrar"
+            label="Cadstrar"
             reverse
           />
         </form>

@@ -1,0 +1,15 @@
+.signin {
+  .swap {
+    width: 100%;
+    text-align: left;
+  }
+  .errorLabel {
+    font-size: 0.8em;
+    height: 2em;
+    align-self: flex-start;
+  }
+
+  .error {
+    border-color: var(--vermelho-lady);
+  }
+}
