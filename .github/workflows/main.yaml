@@ -1,0 +1,38 @@
+# Your workflow name.
+name: Deploy heroku
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Criar .env
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DEBUG: true
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          envkey_EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+          directory: investalfa
+          file_name: .env
+          fail_on_empty: false
+
+      - name: Build, Push and Release a Docker container to Heroku.
+        uses: gonuit/heroku-docker-deploy@v1.3.3
+        with:
+          email: gustavo.simoes@grad.ufsc.br
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: investalfa
+          dockerfile_directory: ./
+          dockerfile_name: Dockerfile
+          docker_options: "--no-cache"
+          process_type: web
