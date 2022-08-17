@@ -21,6 +21,7 @@ from .client import client
 urlpatterns = [
     path("", client, name="client"),
     path("signin", client, name="client"),
+    path("signup", client, name="client"),
     path('api/quotes/', include('investalfa.apps.quotes.urls')),
     path('api/companies/', include('investalfa.apps.companies.urls')),
     path('api/auth/', include('investalfa.apps.auth.urls')),
