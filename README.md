@@ -36,6 +36,8 @@ API RestFull feita com Django
 
 PWA feito com ReactJS
 
+![Captura de tela da aplicação](assets/client.png)
+
 ### Features
 
 - [x] Controle de acesso baseado em JWT
