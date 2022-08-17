@@ -10,4 +10,4 @@ RUN poetry install --no-dev
 
 RUN poetry shell
 
-CMD [ "python3", "manage.py" , "runserver"]
+CMD gunicorn investalfa.wsgi:application --bind 0.0.0.0:$PORT
