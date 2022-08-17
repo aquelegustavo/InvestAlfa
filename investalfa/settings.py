@@ -25,7 +25,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG") or False
 """ Aplicação em depuração? """
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['investalfa.herokuapp.com']
 """ Hosts autorizados """
 
 AUTH_USER_MODEL = 'users.CustomUser'
