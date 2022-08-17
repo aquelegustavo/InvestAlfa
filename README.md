@@ -12,7 +12,7 @@ Fluxograma simples da aplicação:
 
 ## Início rápido
 
-**❗️ Utilize o [Poetry](https://python-poetry.org/) para gerenciar as bibliotecas do projeto!**
+**❗️ Recomendo usar o [Poetry](https://python-poetry.org/) para gerenciar as bibliotecas do projeto!**
 
 Para instalar dependências (incluindo as de desenvolvimento) do projeto utilize:
 
@@ -51,3 +51,4 @@ PWA feito com ReactJS
 </hr>
 
 Feito com ❤️ e muito café (☕) por Gustavo Simões <gustavosimoesmendonca@gmail.com>
+#InoaMeContrata
